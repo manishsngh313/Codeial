@@ -1,0 +1,19 @@
+{
+  "name": "codiel",
+  "version": "1.0.0",
+  "description": "my first social site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/manishsngh313/Codiel.git"
+  },
+  "author": "Manish Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manishsngh313/Codiel/issues"
+  },
+  "homepage": "https://github.com/manishsngh313/Codiel#readme"
+}
