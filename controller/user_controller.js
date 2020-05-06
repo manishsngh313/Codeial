@@ -1,4 +1,5 @@
 const User = require('../models/user')
+// const passport = require('passport')
 
 module.exports.home = function (req,res){
     return res.render('profile', {
@@ -7,12 +8,18 @@ module.exports.home = function (req,res){
 }
 
 module.exports.signIn = function (req,res){
+    if (req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('user_sign_in',{
         title:"codeial | sign in"
     })
 }
 
 module.exports.signUp = function (req,res){
+    if (req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('user_sign_up',{
         title:"codeial | sign up"
     });
@@ -20,7 +27,7 @@ module.exports.signUp = function (req,res){
  
 // get the signup data 
 module.exports.create = function (req,res){
-    //to do later
+    
     if(req.body.password != req.body.confirm_password){
         return res.redirect('back'); 
     }
@@ -45,5 +52,10 @@ module.exports.create = function (req,res){
 
 //get the signin data
 module.exports.createSession = function (req,res){
-    //todo later
+    return res.redirect('/');
+}
+
+module.exports.destroySession = function(req,res){
+    req.logout();
+    return res.redirect('/');
 }
