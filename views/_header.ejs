@@ -1,10 +1,13 @@
+<link rel="stylesheet" href="/css/header.css">
 <header>
-    <h4>Header</h4>
-    <% if(locals.user){ %>
-        <a href="/"> <%= user.name %></a>
-        <a href="/users/sign-out">sign-out</a>    
-    <%} else { %>
-        <a href="users/sign-in">sign-in</a>
-        <a href="/users/sign-up">sign-up</a>
-    <%} %>
+    <h4>Codeial</h4>
+    <div>
+        <% if(locals.user){ %>
+            <a href="/"> <%= user.name %></a>
+            <a href="/users/sign-out">sign-out</a>    
+        <%} else { %>
+            <a href="users/sign-in">sign-in</a>
+            <a href="/users/sign-up">sign-up</a>
+        <%} %>
+    </div>
 </header>
