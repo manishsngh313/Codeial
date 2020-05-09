@@ -1,5 +1,5 @@
 const User = require('../models/user')
-// const passport = require('passport')
+const passport = require('passport')
 
 module.exports.home = function (req,res){
     return res.render('profile', {
