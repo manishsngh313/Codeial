@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const User = require('../models/user');
-const Post = require('../models/post');
+// const User = require('../models/user');
+// const Post = require('../models/post');
 
 
 const commentSchema =  mongoose.Schema({
@@ -8,6 +8,7 @@ const commentSchema =  mongoose.Schema({
         type: String,
         required:true
     },
+    // comment belongs to user
     user :{
         type: mongoose.Schema.Types.ObjectId,
         ref:'User'
@@ -18,7 +19,7 @@ const commentSchema =  mongoose.Schema({
     
     }
 },{
-    timestraps:true
+    timestamps: true
 });
 
 const Comment = mongoose.model('Comment',commentSchema);

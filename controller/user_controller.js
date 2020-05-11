@@ -2,9 +2,23 @@ const User = require('../models/user')
 const passport = require('passport')
 
 module.exports.home = function (req,res){
-    return res.render('profile', {
-        title:'users profile'
-    })
+    User.findById(req.params.id,function(err,user){
+        return res.render('profile', {
+            title:'users profile',
+            profile_user:user
+        });
+    });
+    
+}
+
+module.exports.update = function(req,res){
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, req.body , function(err,user){
+            if(err){console.log('error in updating the user details'); return ;}
+            return res.redirect('back');
+        })
+    } else 
+    return res.status(401).send('unatharise');
 }
 
 module.exports.signIn = function (req,res){

@@ -3,6 +3,6 @@ footer {
   color: white;
   height: 50px;
   width: 100%;
-  position: absolute;
-  top: 90%;
+  position: sticky;
+  bottom: 0px;
 }

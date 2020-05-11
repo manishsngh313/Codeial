@@ -1,12 +1,27 @@
 
         <h1>
-            CODEIAL / Profile
+            CODEIAL/PROFILE
         </h1>
 
-        <p>
-            <%= user.name %>
-        </p>
-        <p>
-            <%= user.email %>
-        </p>
+       
+
+        <% if(user.id == profile_user.id){ %>
+            <!-- if user mathes then show the form -->
+            <form action="/users/update-profile/<%= profile_user._id %>" method="POST">
+            <input type="text" name="name" placeholder="updated name..." value="<%= profile_user.name %>">
+            <input type="email" name="email" placeholder="updated email..." value="<%= profile_user.email %>">
+            <input type="submit" value="Update">
+            </form>
+
+
+        <% } else { %>
+            <!-- if the user does not matches then show the user details -->
+            <p>
+                <%= profile_user.name %>
+
+            </p>
+            <p>
+                <%= profile_user.email %>
+            </p>
+        <%} %>
      
