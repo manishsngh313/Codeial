@@ -1,26 +1,40 @@
-<section id = "post-feed">
-    <h4>Posts</h4>
-    <form action="/posts/create-post" method="POST">
-        <textarea name="content" id="post-feed-content" cols="30" rows="4" placeholder="Type Here..." required></textarea>
-        <input type="submit" value="submit">
-    </form>
-</section>
-<section id = 'posts-list-container'>
-    <ul>
-        <% for(post of posts) { %> 
-            <li>
-                <p>
-                    <% if (post.user.id == locals.user.id) {%>
-                        <a href="/posts/delete/<%= post._id %>">X</a>
-                    <%}%>
-                    <!-- <%= post.comments %> -->
-                    <%= post.content %>
-                    <br>
-                    <%= post.user.name %>
-                  <%- include('_comment') %>
-                </p>
-            </li>
-        <%}%>
 
-    </ul>
-</section>
+<li id="post-<%= post._id %>">
+    <p>
+        <% if (locals.user && post.user.id == locals.user.id) {%>
+        <small>
+            <a class="delete-post-button" href="/posts/delete/<%= post._id %>">X</a>
+        </small>
+            
+        <%}%>
+        <!-- <%= post.comments %> -->
+        <%= post.content %>
+        <br>
+        <small>
+            <%= post.user.name %>
+        </small>
+       
+       
+    </p>
+    <div id = 'comment-feed'>
+        <% if (locals.user) {%>      
+            <form action="/comments/create-comments" class = "new-comment-form" method="POST">
+                <input type="text" name="content" placeholder="Type here to start comment...">
+                <input type="hidden" name="post" value="<%= post._id %>">
+                <input type="submit" value="comment">
+            </form>
+            
+        <% } %>
+        <div class="post-comments-list">
+            <ul id="post-comments-<%= post._id %>">
+                <% for (comment of post.comments){%>
+                    <%- include('_comment') %>
+                    
+                
+                <%} %>
+            </ul>
+        </div>
+    </div>
+
+</li>
+       

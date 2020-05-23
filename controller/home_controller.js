@@ -4,7 +4,7 @@ const Post = require('../models/post');
 const User = require('../models/user');
 
 
-module.exports.home = function (req,res){
+module.exports.home = async function (req,res){
    // console.log(req.body);
     //console.log(req.cookies);
 
@@ -27,31 +27,43 @@ module.exports.home = function (req,res){
 
 
     // });
-
-
-    Post.find({})
-    .populate('user')
-    .populate(
-        {
-        path: 'comments',
-        populate: {
-            path: 'user'
+    try {
+        let posts =  await Post.find({})
+        .sort('-createdAt')
+        .populate('user')
+        .populate(
+            {
+            path: 'comments',
+            populate: {
+                path: 'user'
+            }
+            
         }
-    }
-    )
-    .exec(function(err, posts){
+        ).sort('-createdAt');
+        
+        
+
+
 
         // if (err){console.log('Error in finding the post in home'); return;}
 
-        User.find({}, function(err,users){
-            return res.render('home', {
-                title: "Codeial | Home",
-                posts:  posts,
-                all_users:users
-            });
-        });
+        let users = await User.find({})
+        
+
         // console.log(post[0].comments);
-       
-    })
     
+
+
+        return res.render('home', {
+            title: "Codeial | Home",
+            posts:  posts,
+            all_users:users
+        });
+
+    }catch(err){
+        console.log('error', err);
+        return;
+    }
+   
+
 }

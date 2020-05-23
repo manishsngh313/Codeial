@@ -1,24 +1,45 @@
 <link rel="stylesheet" href="/css/home.css">
-<div id = "home">
-    <h1>
-        CODEIAL / <%= title %>
+<div id="home-container">
+    <div id = "feed-post">
+        <h1>
+            CODEIAL / <%= title %>
+    
+        </h1>
+        <% if(locals.user){ %> 
+        <section id = "post-feed">
+            <h4>Posts</h4>
+            <form action="/posts/create-post" id="new-post-form" method="POST">
+                <textarea name="content" id="post-feed-content" cols="30" rows="4" placeholder="Type Here..." required></textarea>
+                <input type="submit" value="submit">
+            </form>
+        </section>
+        <%}%>
+        <section id = 'posts-list-container'>
+            <ul>
+                <% for(post of posts) { %> 
+                <%- include('_post') %>
+                <%}%>
 
-    </h1>
-    <% if(locals.user){ %> 
-       <%- include('_post') %>
-    <%}%>
-
+            </ul>
+        </section>
+        
+    
+        
+    </div>
+    
+    <section id = "friend-list">
+        <header> <h4>Friends</h4></header>
+        <% for(u of all_users) { %> 
+            <p>
+                <a href="/users/profile/<%= u._id %>">
+                
+                   <%= u.name %>
+                </u></u></a>
+            </p>
+        <%} %>
+    </section>
     
 </div>
 
-<section id = "friend-list">
-    <header> <h4>Friends</h4></header>
-    <% for(u of all_users) { %> 
-        <p>
-            <a href="/users/profile/<%= u._id %>">
-            
-               <%= u.name %>
-            </u></u></a>
-        </p>
-    <%} %>
-</section>
+<script src="/js/home_posts.js"></script>
+<script src="/js/home_comment.js"></script>

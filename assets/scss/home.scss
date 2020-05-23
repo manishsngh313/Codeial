@@ -1,3 +1,16 @@
 // div h1 {
 //     height: 90vh;
 // }
+#home-container{
+    display: flex;
+}
+
+#feed-post{
+    width:70%;
+}
+
+#friend-list{
+    width: 30%;
+    border-left: 1px solid grey;
+    padding: 10px;
+}

@@ -1,15 +1,13 @@
-
-        <h1>
-            CODEIAL/PROFILE
-        </h1>
+        <img src="<%= user.avatar %>" alt="<%= user.name %>" width="100px">
 
        
 
         <% if(user.id == profile_user.id){ %>
             <!-- if user mathes then show the form -->
-            <form action="/users/update-profile/<%= profile_user._id %>" method="POST">
+            <form action="/users/update-profile/<%= profile_user._id %>" enctype="multipart/form-data" method="POST">
             <input type="text" name="name" placeholder="updated name..." value="<%= profile_user.name %>">
             <input type="email" name="email" placeholder="updated email..." value="<%= profile_user.email %>">
+            <input type="file" name="avatar" placeholder="profile picture">
             <input type="submit" value="Update">
             </form>
 
