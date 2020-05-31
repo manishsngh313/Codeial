@@ -9,12 +9,12 @@ passport.use(new LocalStrategy({
     //find a USER and stablish the identity
     User.findOne({email:email}, function(err,user){
         if (err){
-            console.log('Error in finding the user --> passport');
+            console.log('Error in finding the user --> passport', err);
             return done(err);
         }
         if(!user || user.password != password){
             console.log('Invalid email/password');
-            done(null,false)
+            return done(null,false)
         }
         return done(null,user);
     } )
